@@ -1,0 +1,37 @@
+{
+  "name": "uber-mobile-tests",
+  "version": "1.0.0",
+  "description": "Singular Test Framework for Titanium Mobile SDK",
+  "main": "test.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/appcelerator/uber-mobile-tests.git"
+  },
+  "keywords": [
+    "mobile",
+    "mochajs",
+    "appium",
+    "titanium"
+  ],
+  "author": "Wilson Luu",
+  "contributors": [
+    "Chris Williams <cwilliams@appcelerator.com>"
+  ],
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/appcelerator/uber-mobile-tests/issues"
+  },
+  "homepage": "https://github.com/appcelerator/uber-mobile-tests#readme",
+  "dependencies": {
+    "async": "^2.1.5",
+    "colors": "^1.1.2",
+    "commander": "^2.9.0",
+    "ejs": "^2.5.6",
+    "stream-splitter": "^0.3.2",
+    "titanium": "git+http://github.com/appcelerator/titanium.git#master",
+    "wrench": "^1.5.9"
+  },
+  "engines": {
+    "node": ">=4.0.0"
+  }
+}
