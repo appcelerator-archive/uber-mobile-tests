@@ -27,9 +27,9 @@
     "colors": "^1.1.2",
     "commander": "^2.9.0",
     "ejs": "^2.5.6",
+    "fs-extra": "^2.0.0",
     "stream-splitter": "^0.3.2",
-    "titanium": "git+http://github.com/appcelerator/titanium.git#master",
-    "wrench": "^1.5.9"
+    "titanium": "git+http://github.com/appcelerator/titanium.git#master"
   },
   "engines": {
     "node": ">=4.0.0"
