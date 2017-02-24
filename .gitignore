@@ -1,5 +1,5 @@
 .DS_Store
+junit.*.xml
 /node_modules
 !lib/unit_test/app/Resources/node_modules
 lib/unit_test/mocha
-lib/unit_test/junit.*.xml
