@@ -6,7 +6,7 @@
  */
 
 var should = require('./utilities/assertions'),
-	utilities = require('./utilities/utilities');
+	utilities = require('./utilities/utilities'),
 	didFocus = false;
 
 describe('Titanium.UI.ListView', function () {
@@ -554,11 +554,11 @@ describe('Titanium.UI.ListView', function () {
 		win.add(listView);
 		win.open();
 	});
-	
+
 	// Since the tested API is iOS only, we will skipp all other platforms
-	((!utilities.isIOS()) ? it.skip : it)('ListItem.properties', function () {	
+	((!utilities.isIOS()) ? it.skip : it)('ListItem.properties', function () {
 		var win = Ti.UI.createWindow();
-		 
+
 		var list = Ti.UI.createListView({
 			sections: [Ti.UI.createListSection({
 				items: [{
@@ -572,21 +572,21 @@ describe('Titanium.UI.ListView', function () {
 				}]
 			})]
 		});
-		 
+
 		win.add(list);
 		win.open();
-	
+
 		// Validate list and section
 		should(list.apiName).be.eql('Ti.UI.ListView');
 		var section = list.sections[0];
 		should(section.apiName).be.eql('Ti.UI.ListSection');
-		
+
 		// Validate items
 		var items = section.items;
 		should(items).be.an.Array;
 		should(items.length).be.a.Number;
 		should(items.length).be.eql(1);
-		
+
 		// Validate single item
 		var item = items[0];
 		var template = item.template;
@@ -597,12 +597,12 @@ describe('Titanium.UI.ListView', function () {
 		should(template).not.be.undefined;
 		should(template).be.a.Number;
 		should(template).eql(Ti.UI.LIST_ITEM_TEMPLATE_CONTACTS);
-		
+
 		// Validate item properties
 		should(item.hasOwnProperty('properties')).be.true;
 		should(properties).not.be.undefined;
 		should(properties).be.an.Object;
-		
+
 		// Validate properties subtitleColor and selectedSubtitleColor
 		should(properties.hasOwnProperty('subtitleColor')).be.true;
 		should(properties.subtitleColor).be.a.String;
