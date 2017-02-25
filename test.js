@@ -13,31 +13,35 @@ program
 	.parse(process.argv);
 
 const platforms = program.platforms.split(',');
-unit.test(program.branch, platforms, (err, results) => {
-	if (err) {
-		console.error(err.toString());
-		process.exit(1);
-		return;
-	}
 
-	let p = Promise.resolve();
+// run unit tests first
+let p = new Promise((resolve, reject) => {
+	unit.test(program.branch, platforms, (err, results) => {
+		if (err) {
+			reject(err);
+			return;
+		}
+		resolve(results);
+	});
+});
 
-	platforms.forEach(platform => {
-		p = p.then(() => {
-			return new Promise((resolve, reject) => {
-				console.log();
-				console.log('=====================================');
-				console.log(platform.toUpperCase());
-				console.log('-------------------------------------');
-				unit.outputResults(results[platform].results, resolve);
-			});
+// print out results from unit tests
+p.then(unitTestResults => {
+	return new Promise(resolve => {
+		platforms.forEach(platform => {
+			console.log();
+			console.log('=====================================');
+			console.log(platform.toUpperCase());
+			console.log('-------------------------------------');
+			unit.outputResults(unitTestResults[platform].results);
 		});
+		resolve();
 	});
+});
 
-	p.then(() => {
-		process.exit(0);
-	}).catch(err => {
-		console.error(err.toString());
-		process.exit(1);
-	});
+p.then(() => {
+	process.exit(0);
+}).catch(err => {
+	console.error(err.toString());
+	process.exit(1);
 });
