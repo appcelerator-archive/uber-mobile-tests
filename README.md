@@ -15,7 +15,9 @@ The purpose of this repo is to combine https://github.com/appcelerator/titanium-
     2. Record the SDK we just installed so we retain it when we clean up at end.
     3. Create a titanium project.
     4. Copy assets from `lib/unit_test/app` into the titanium project.
+    
       a. Populate `lib/unit_test/templates/app.ejs` with the test suites from `./unit_tests`.
+      
       b. Render `lib/unit_test/templates/app.ejs` into the titanium project.
     5. Add required properties for our unit tests.
     6. Run unit test builds for each platform, and spit out JUnit report.
