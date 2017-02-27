@@ -24,4 +24,24 @@ The purpose of this repo is to combine https://github.com/appcelerator/titanium-
     7. Remove all CI SDKs installed.
     8. **TODO:** follow `appium-tests` main loop: [here](https://github.com/appcelerator/appium-tests/blob/master/README.md#main-loop), minus `buildTestApps()`; the unit_test app should be enough.
 
-	  a. **TODO:** need to poupulate `appium_tests` folder with the this structure [here](https://github.com/appcelerator/appium-tests/tree/master/tests)
+	  1. `runAppium()` - launches the local Appium server.
+	  2. `buildTestApps()` - if `--use-sdk` flag is passed, then build all the test apps before moving onto the next task.
+
+	    **TODO:**
+		  - Use local titanium module to build project; build mobile project with titanium.
+		  - Need to replace SDK with `ti sdk list -o json` activeSDK.
+		  - Don't need to use ti sdk select since that will already be selected in the unit tests.
+		  - **Need to decide to either use Appc CLI or Titanium CLI**.
+
+	  3. `createTests()` - create a data structure from `--suites` and loop through the data structure. While looping:
+
+	    **TODO:** For now, use `Help.transform(null)` to pass to `Help.createTests()`; this will run all the appium test suites.
+
+	    1. `launchGeny()` - if the test app needs to be tested on an Android platform, launch the designated Genymotion emulator first. iOS simulators will be launched in the next step by Appium.
+	    2. `startClient()` - after the simulator/genymotion is launched, install the test app to the device and connect to the Appium local server.
+	    3. `new Mocha().addFile().run()` - run the associated mocha test suite.
+	    4. `stopClient()` - after a mocha test suite is finished running, disconnect the mobile device from the Appium local server. Depending on the `desiredCapabilities`, iOS simulators can be left running or killed.
+	    5. `quitGeny()` - if a Genymotion emulator is launched, gracefully kill the process.
+	  4. `killAppium()` - after all the test suites are executed, kill the Appium local server.
+
+	    **TODO:** Hmmm, need to watch out for this part.
