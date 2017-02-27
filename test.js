@@ -29,10 +29,12 @@ let p = new Promise((resolve, reject) => {
 p.then(unitTestResults => {
 	return new Promise(resolve => {
 		platforms.forEach(platform => {
-			console.log();
-			console.log('=====================================');
-			console.log(platform.toUpperCase());
-			console.log('-------------------------------------');
+			const header = `
+=====================================
+${platform.toUpperCase()}
+-------------------------------------`;
+
+			console.log(header);
 			unit.outputResults(unitTestResults[platform].results);
 		});
 		resolve();
