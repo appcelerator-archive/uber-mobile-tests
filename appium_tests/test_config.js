@@ -16,22 +16,8 @@ module.exports = {
 				automationName: 'XCUITest',
 				noReset: true
 			},
-			Slider: {
-				proj: 'KitchenSink',
-				testDevices: [
-					// these are simulators
-					{
-						deviceName: 'iPhone 7 Plus',
-						platformVersion: '10.2'
-					},
-					{
-						deviceName: 'iPhone 7',
-						platformVersion: '10.1'
-					}
-				]
-			},
-			Button: {
-				proj: 'ButtonModule',
+			'ti.ui.listview': {
+				proj: 'ListView',
 				testDevices: [
 					// these are simulators
 					{
@@ -48,18 +34,14 @@ module.exports = {
 				noReset: true,
 				deviceReadyTimeout: 20 // seconds
 			},
-			Slider: {
-				proj: 'KitchenSink',
-				appPackage: 'com.appcelerator.kitchensink',
-				appActivity: '.KitchensinkActivity',
+			'ti.ui.listview': {
+				proj: 'ListView',
+				appPackage: 'com.appc.listview',
+				appActivity: '.ListviewActivity',
 				testDevices: [
 					{
 						deviceName: 'Custom Phone - 6.0.0 - API 23 - 768x1280',
 						platformVersion: '6.0'
-					},
-					{
-						deviceName: 'Custom Phone - 7.0.0 - API 24 - 768x1280',
-						platformVersion: '7.0'
 					}
 				]
 			}
