@@ -41,16 +41,19 @@ const platforms = program.platforms.split(',');
 // 		resolve();
 // 	});
 // });
+
+// NOTE: throw away later
 let p = Promise.resolve();
 
 // run the appium mocha tests
-p.then(() => {
+p = p.then(() => {
 	return new Promise((resolve, reject) => {
 		ui.test(platforms, resolve, reject);
 	});
 });
 
 p.then(() => {
+	console.log('exit 0');
 	process.exit(0);
 })
 .catch(err => {
