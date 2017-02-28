@@ -52,10 +52,13 @@ p = p.then(() => {
 	});
 });
 
-p.then(() => {
-	console.log('DONE');
-})
-.catch(err => {
-	console.error(err.toString());
+p.catch(err => {
+	if (err.stack) {
+		console.error(err.stack);
+	}
+	else {
+		console.error(err.toString());
+	}
+
 	process.exit(1);
 });
