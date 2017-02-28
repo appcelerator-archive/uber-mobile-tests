@@ -3,3 +3,4 @@ junit.*.xml
 /node_modules
 !lib/unit_test/app/Resources/node_modules
 lib/unit_test/mocha
+build

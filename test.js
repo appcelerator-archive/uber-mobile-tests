@@ -53,8 +53,7 @@ p = p.then(() => {
 });
 
 p.then(() => {
-	console.log('exit 0');
-	process.exit(0);
+	console.log('DONE');
 })
 .catch(err => {
 	console.error(err.toString());
