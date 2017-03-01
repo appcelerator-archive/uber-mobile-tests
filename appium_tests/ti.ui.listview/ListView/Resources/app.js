@@ -1,5 +1,8 @@
-var win = Ti.UI.createWindow({backgroundColor: 'white'});
-var listView = Ti.UI.createListView();
+var win = Ti.UI.createWindow({
+	backgroundColor: 'white',
+	layout: 'vertical'
+});
+var listView = Ti.UI.createListView({top: '3%'});
 var sections = [];
 
 var fruitSection = Ti.UI.createListSection({ headerTitle: 'Fruits'});
