@@ -58,7 +58,6 @@
 		<target device="android">true</target>
 		<target device="ipad">true</target>
 		<target device="iphone">true</target>
-		<target device="mobileweb">true</target>
 	</deployment-targets>
 	<sdk-version>6.1.0.v20170223182720</sdk-version>
 </ti:app>

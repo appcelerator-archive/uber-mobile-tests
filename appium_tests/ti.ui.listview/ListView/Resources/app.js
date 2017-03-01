@@ -1,47 +1,64 @@
-/**
- * Create a new `Ti.UI.TabGroup`.
- */
-var tabGroup = Ti.UI.createTabGroup();
+var win = Ti.UI.createWindow({backgroundColor: 'white'});
+var listView = Ti.UI.createListView();
+var sections = [];
 
-/**
- * Add the two created tabs to the tabGroup object.
- */
-tabGroup.addTab(createTab("Tab 1", "I am Window 1", "assets/images/tab1.png"));
-tabGroup.addTab(createTab("Tab 2", "I am Window 2", "assets/images/tab2.png"));
+var fruitSection = Ti.UI.createListSection({ headerTitle: 'Fruits'});
+var fruitDataSet = [
+    {properties: { title: 'Apple', color: 'black'}},
+    {properties: { title: 'Banana', color: 'black'}},
+	{properties: { title: 'Pineapple', color: 'black'}},
+	{properties: { title: 'Peach', color: 'black'}},
+	{properties: { title: 'Orange', color: 'black'}},
+	{properties: { title: 'Durian', color: 'black'}},
+	{properties: { title: 'Jackfruit', color: 'black'}},
+	{properties: { title: 'Watermelon', color: 'black'}},
+	{properties: { title: 'Prickly Pear', color: 'black'}},
+	{properties: { title: 'Kiwi', color: 'black'}},
+	{properties: { title: 'Tomatoes', color: 'black'}},
+	{properties: { title: 'Asian Pear', color: 'black'}},
+];
+fruitSection.setItems(fruitDataSet);
+sections.push(fruitSection);
 
-/**
- * Open the tabGroup
- */
-tabGroup.open();
+var vegSection = Ti.UI.createListSection({ headerTitle: 'Vegetables'});
+var vegDataSet = [
+    {properties: { title: 'Carrots', color: 'black'}},
+    {properties: { title: 'Potatoes', color: 'black'}},
+	{properties: { title: 'Lettuce', color: 'black'}},
+    {properties: { title: 'Winter Melon', color: 'black'}},
+	{properties: { title: 'Bitter Melon', color: 'black'}},
+    {properties: { title: 'Bok Choy', color: 'black'}},
+	{properties: { title: 'Water Chestnut', color: 'black'}},
+    {properties: { title: 'Bean Sprouts', color: 'black'}},
+	{properties: { title: 'Nappa Cabbage', color: 'black'}},
+	{properties: { title: 'Squash', color: 'black'}},
+	{properties: { title: 'Spinach', color: 'black'}},
+	{properties: { title: 'Sea Weed', color: 'black'}},
+	{properties: { title: 'Ginger', color: 'black'}},
+];
+vegSection.setItems(vegDataSet);
+sections.push(vegSection);
 
-/**
- * Creates a new Tab and configures it.
- *
- * @param  {String} title The title used in the `Ti.UI.Tab` and it's included `Ti.UI.Window`
- * @param  {String} message The title displayed in the `Ti.UI.Label`
- * @return {String} icon The icon used in the `Ti.UI.Tab`
- */
-function createTab(title, message, icon) {
-    var win = Ti.UI.createWindow({
-        title: title,
-        backgroundColor: '#fff'
-    });
+listView.sections = sections;
+win.add(listView);
+win.open();
 
-    var label = Ti.UI.createLabel({
-        text: message,
-        color: "#333",
-        font: {
-            fontSize: 20
-        }
-    });
-
-    win.add(label);
-
-    var tab = Ti.UI.createTab({
-        title: title,
-        icon: icon,
-        window: win
-    });
-
-    return tab;
-}
+var fishSection = Ti.UI.createListSection({ headerTitle: 'Fish'});
+var fishDataSet = [
+    {properties: { title: 'Cod', color: 'black'}},
+    {properties: { title: 'Haddock', color: 'black'}},
+	{properties: { title: 'Tuna', color: 'black'}},
+	{properties: { title: 'Halibut', color: 'black'}},
+	{properties: { title: 'Salmon', color: 'black'}},
+	{properties: { title: 'Catfish', color: 'black'}},
+	{properties: { title: 'Dogfish', color: 'black'}},
+	{properties: { title: 'Shark', color: 'black'}},
+	{properties: { title: 'Angler Fish', color: 'black'}},
+	{properties: { title: 'Suckerfish', color: 'black'}},
+	{properties: { title: 'Flatfish', color: 'black'}},
+	{properties: { title: 'Rockfish', color: 'black'}},
+	{properties: { title: 'Trout', color: 'black'}},
+	{properties: { title: 'Piranha', color: 'black'}},
+];
+fishSection.setItems(fishDataSet);
+listView.appendSection(fishSection);
