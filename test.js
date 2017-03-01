@@ -16,34 +16,31 @@ program
 const platforms = program.platforms.split(',');
 
 // run unit tests first
-// let p = new Promise((resolve, reject) => {
-// 	unit.test(program.branch, platforms, (err, results) => {
-// 		if (err) {
-// 			reject(err);
-// 			return;
-// 		}
-// 		resolve(results);
-// 	});
-// });
-//
-// // print out results from unit tests
-// p.then(unitTestResults => {
-// 	return new Promise(resolve => {
-// 		platforms.forEach(platform => {
-// 			const header = `
-// =====================================
-// ${platform.toUpperCase()}
-// -------------------------------------`;
-//
-// 			console.log(header);
-// 			unit.outputResults(unitTestResults[platform].results);
-// 		});
-// 		resolve();
-// 	});
-// });
+let p = new Promise((resolve, reject) => {
+	unit.test(program.branch, platforms, (err, results) => {
+		if (err) {
+			reject(err);
+			return;
+		}
+		resolve(results);
+	});
+});
 
-// NOTE: throw away later
-let p = Promise.resolve();
+// print out results from unit tests
+p.then(unitTestResults => {
+	return new Promise(resolve => {
+		platforms.forEach(platform => {
+			const header = `
+=====================================
+${platform.toUpperCase()}
+-------------------------------------`;
+
+			console.log(header);
+			unit.outputResults(unitTestResults[platform].results);
+		});
+		resolve();
+	});
+});
 
 // run the appium mocha tests
 p = p.then(() => {
@@ -59,6 +56,5 @@ p.catch(err => {
 	else {
 		console.error(err.toString());
 	}
-
 	process.exit(1);
 });
