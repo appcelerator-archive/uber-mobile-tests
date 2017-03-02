@@ -50,11 +50,7 @@ p = p.then(() => {
 });
 
 p.catch(err => {
-	if (err.stack) {
-		console.error(err.stack);
-	}
-	else {
-		console.error(err.toString());
-	}
+	const msg = err.stack || err.toString();
+	console.log(msg);
 	process.exit(1);
 });
