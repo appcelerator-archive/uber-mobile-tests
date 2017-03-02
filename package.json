@@ -23,6 +23,7 @@
   },
   "homepage": "https://github.com/appcelerator/uber-mobile-tests#readme",
   "dependencies": {
+    "appcelerator": "^4.2.8",
     "appium": "^1.6.3",
     "async": "^2.1.5",
     "chai": "^3.5.0",
@@ -33,7 +34,6 @@
     "fs-extra": "^2.0.0",
     "mocha": "^3.2.0",
     "stream-splitter": "^0.3.2",
-    "titanium": "git+http://github.com/appcelerator/titanium.git#master",
     "wd": "^1.1.3"
   },
   "engines": {
