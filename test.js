@@ -34,7 +34,6 @@ p.then(unitTestResults => {
 =====================================
 ${platform.toUpperCase()}
 -------------------------------------`;
-
 			console.log(header);
 			unit.outputResults(unitTestResults[platform].results);
 		});
