@@ -7,8 +7,9 @@ A singular test framework that merged both https://github.com/appcelerator/titan
 1. Minimum node version 4.X.
 2. Minimum NPM version 3.X.
 3. GA Appc CLI Core should be installed on your machine and logged in.
+
   **Note:** Appc CLI NPM is a node dependency for this framework.
-4. Genymotion emulator installed; the Appium Tests depend on it.
+4. Genymotion emulator installed to default location; the Appium tests depend on it.
 
 # Setup
 
@@ -16,44 +17,76 @@ A singular test framework that merged both https://github.com/appcelerator/titan
 2. Install `appium-doctor`: `[sudo] npm install -g appium-doctor`.
 3. Run `appium-doctor` and fix any issues that may come up.
 
-# How To
+# How-Tos
 
-## Flags
+### Flag Usage
 
-## Unit Tests
+Run `node test.js --help` to see a list of available flags.
 
-## Appium Tests
+```
+  Options:
 
-# Notes on Structure
+    -h, --help                             output usage information
+    -V, --version                          output the version number
+    -b, --branch [branchName]              Install a specific branch of the SDK to test with. Defaults to 'master'.
+    -u, --sdk-url <url>                    Install the specified SDK URL.
+    -z, --sdk-zip <pathToZip>              Install the specified SDK zip.
+    -p, --platforms <platform1,platform2>  Run unit tests on the given platforms. Defaults to 'android,ios'.
+```
 
-- `test.js` will contain the main loop.
-  - Using commander, it should provide the following options:
-    - -b, --branch [branchName] -> Install a specific branch of the SDK to test with; defaults to `master`
-    - -p, --platforms <platform1,platform2> -> Run unit tests and appium tests on the given platforms; defaults to both `andrdoid` and `ios`
-  - at a high-level, the main loop should do the following:
+If you run `node test.js` (no flags), then the framework will check for new Titanium SDK against `master` branch
+and run all tests on both Android and iOS platform in that order.
 
-    1. In parallel, install new sdk and delete old test app.
-    2. Record the SDK we just installed so we retain it when we clean up at end.
-    3. Create a titanium project.
-    4. Copy assets from `lib/unit_test/app` into the titanium project.
+### Unit Tests
 
-      a. Populate `lib/unit_test/templates/app.ejs` with the test suites from `./unit_tests`.
+The Titanium unit tests lives in the `unit_tests` directory and uses the `ti-mocha.js` module to run the test suites.
 
-      b. Render `lib/unit_test/templates/app.ejs` into the titanium project.
+This part is a port of https://github.com/appcelerator/titanium-mobile-mocha-suite, but with some differences:
 
-    5. Add required properties for our unit tests.
-    6. Run unit test builds for each platform, and spit out JUnit report.
-    7. Remove all CI SDKs installed.
-    8. Follow `appium-tests` main loop:
+* In `titanium-mobile-mocha-suite`, the unit tests (any `ti.*.test.js` file) lived here: https://github.com/appcelerator/titanium-mobile-mocha-suite/tree/master/Resources.
+The unit tests in this framework live in the `./unit_tests` directory and will be copied over to `./lib/unit_test/mocha`; a Titanium classic app created at runtime.
+* `./lib/unit_test/mocha` will contain `utilities/assertions.js` and `utilities/utilities.js` in the `Resources` directory. Hence, the unit tests will contain these
+modules at the top:
 
-	  1. `_runAppium()` - launches the local Appium server.
-	  2. `_buildTestApps()` - build all the test apps using the active sdk.
-	  3. `_createTests()` - create a data structure from `_transform()` and loop through the data structure. While looping:
+```
+var should = require('./utilities/assertions'),
+	utilities = require('./utilities/utilities');
+```
 
-	    1. `_launchGeny()` - if the test app needs to be tested on an Android platform, launch the designated Genymotion emulator first. iOS simulators will be launched in the next step by Appium.
-	    2. `_startClient()` - after the simulator/genymotion is launched, install the test app to the device and connect to the Appium local server.
-	    3. `new Mocha().addFile().run()` - run the associated mocha test suite.
-	    4. `_stopClient()` - after a mocha test suite is finished running, disconnect the mobile device from the Appium local server. Depending on the `desiredCapabilities`, iOS simulators can be left running or killed.
-	    5. `_quitGeny()` - if a Genymotion emulator is launched, gracefully kill the process.
+### Appium Tests
 
-	  4. `_killAppium()` - after all the test suites are executed, kill the Appium local server.
+The Appium tests (UI verification) lives in the `appium_tests` directory.
+
+This part is a port of https://github.com/appcelerator/appium-tests. To write Appium tests, follow these steps: https://github.com/appcelerator/appium-tests#how-to-write-tests.
+
+**Note:** When the above steps reference the `tests` directory in `appium-tests`, that will be `appium_tests` directory in this framework.
+
+# Technical Notes
+
+* Entry point file is `test.js` and all supporting files live in `lib` directory.
+* Unit tests run first before running the Appium tests.
+* Unit test flow `require('./lib/unit_test/helper.js').test()`:
+
+  1. In parallel:
+    a. Install and set as default the new Titanium SDK, if available.
+    b. Delete `mocha` test app, if available.
+  2. Record the path to the installed Titanium SDK. Will be used for SDK cleanup.
+  3. Create a Titanium classic project (called `mocha`) with `appc new`.
+  4. Copy files from `lib/unit_test/app` into `mocha/Resources` directory.
+    a. During this phase, the unit tests in `unit_tests` directory will be copied into `mocha/Resources`
+  5. Add specific properties into `mocha/tiapp.xml`.
+  6. Run (using `appc run`) `mocha` app, i.e. unit tests, against specified platforms.
+  7. Write results to JUnit XML files at the root level of this framework.
+  8. Delete all non-GA and non-selected Titanium SDKs.
+
+* Appium flow `require('./lib/appium_test/helper.js').test()`:
+
+  1. Launch Appium server locally.
+  2. Clean and build (with `appc` CLI) all the test apps in `appium_tests` directory with selected Titanium SDK.
+  3. While looping through each test suite in `appium_tests` directory, do the following:
+    a. Launch designated Genymotion emulator if testing against Android platform. If testing against iOS platform, designated simulator will be launched in next step by Appium.
+    b. If testing for Android platform, connect Genymotion emulator to Appium server. If testing for iOS platform, Appium will launch the designated iOS simulator and connect it to the server.
+    c. Run the mocha test suite on the simulator/emulator and print out results to console.
+    d. Once testing is complete, disconnect the simulator/emulator from Appium server. Depending on the `desiredCapabilities`, iOS simulators can be left running or killed.
+    e. If Genymotion emulator is still running, gracefully kill the process.
+  4. Gracefully kill the Appium local server.
