@@ -4,20 +4,24 @@ const
 	program = require('commander'),
 	unit = require('./lib/unit_test/helper.js'),
 	ui = require('./lib/appium_test/helper.js'),
+	getSDKSrc = require('./lib/appc_util.js').getSDKSrc,
 	VER = require('./package.json').version;
 
 program
 	.version(VER)
-	// TODO Allow choosing a URL or zipfile as SDK to install!
-	.option('-b, --branch [branchName]', 'Install a specific branch of the SDK to test with', 'master')
-	.option('-p, --platforms <platform1,platform2>', 'Run unit tests on the given platforms', /^(android(,ios)?)|(ios(,android)?)$/, 'android,ios')
+	.option('-b, --branch [branchName]', 'Install a specific branch of the SDK to test with.', 'master')
+	.option('-u, --sdk-url <url>', 'Install the specified SDK URL.')
+	.option('-z, --sdk-zip <pathToZip>', 'Install the specified SDK zip.')
+	.option('-p, --platforms <platform1,platform2>', 'Run unit tests on the given platforms.', /^(android(,ios)?)|(ios(,android)?)$/, 'android,ios')
 	.parse(process.argv);
 
-const platforms = program.platforms.split(',');
+const
+	platforms = program.platforms.split(','),
+	sdkSrc = getSDKSrc(program.branch, program.sdkUrl, program.sdkZip);
 
 new Promise((resolve, reject) => {
 	// run unit tests first
-	unit.test(program.branch, platforms, (err, results) => {
+	unit.test(sdkSrc, platforms, (err, results) => {
 		if (err) {
 			reject(err);
 			return;

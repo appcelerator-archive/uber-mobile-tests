@@ -1,14 +1,35 @@
-# uber-mobile-tests (WIP)
+# uber-mobile-tests
 
-The purpose of this repo is to combine https://github.com/appcelerator/titanium-mobile-mocha-suite and https://github.com/appcelerator/appium-tests into a singular test framework.
+A singular test framework that merged both https://github.com/appcelerator/titanium-mobile-mocha-suite and https://github.com/appcelerator/appium-tests.
+
+# Requirements
+
+1. Minimum node version 4.X.
+2. Minimum NPM version 3.X.
+3. GA Appc CLI Core should be installed on your machine and logged in.
+  **Note:** Appc CLI NPM is a node dependency for this framework.
+4. Genymotion emulator installed; the Appium Tests depend on it.
+
+# Setup
+
+1. Run `npm install`.
+2. Install `appium-doctor`: `[sudo] npm install -g appium-doctor`.
+3. Run `appium-doctor` and fix any issues that may come up.
+
+# How To
+
+## Flags
+
+## Unit Tests
+
+## Appium Tests
+
+# Notes on Structure
 
 - `test.js` will contain the main loop.
   - Using commander, it should provide the following options:
     - -b, --branch [branchName] -> Install a specific branch of the SDK to test with; defaults to `master`
     - -p, --platforms <platform1,platform2> -> Run unit tests and appium tests on the given platforms; defaults to both `andrdoid` and `ios`
-    - -s, --suites <suite1,suite2> -> Run specified suite; defaults to running all suites
-      - **THIS PART IS NOT INTEGRATED YET**; pulled from https://github.com/appcelerator/appium-tests
-      - Add this later when time permits.
   - at a high-level, the main loop should do the following:
 
     1. In parallel, install new sdk and delete old test app.
