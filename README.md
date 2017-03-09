@@ -68,14 +68,14 @@ This part is a port of https://github.com/appcelerator/appium-tests. To write Ap
 * Unit test flow `require('./lib/unit_test/helper.js').test()`:
 
   1. In parallel:
-  
+
     a. Install and set as default the new Titanium SDK, if available.
-    
+
     b. Delete `mocha` test app, if available.
   2. Record the path to the installed Titanium SDK. Will be used for SDK cleanup.
   3. Create a Titanium classic project (called `mocha`) with `appc new`.
   4. Copy files from `lib/unit_test/app` into `mocha/Resources` directory.
-  
+
     a. During this phase, the unit tests in `unit_tests` directory will be copied into `mocha/Resources`
   5. Add specific properties into `mocha/tiapp.xml`.
   6. Run (using `appc run`) `mocha` app, i.e. unit tests, against specified platforms.
@@ -87,14 +87,14 @@ This part is a port of https://github.com/appcelerator/appium-tests. To write Ap
   1. Launch Appium server locally.
   2. Clean and build (with `appc` CLI) all the test apps in `appium_tests` directory with selected Titanium SDK.
   3. While looping through each test suite in `appium_tests` directory, do the following:
-  
+
     a. Launch designated Genymotion emulator if testing against Android platform. If testing against iOS platform, designated simulator will be launched in next step by Appium.
-    
-    b. If testing for Android platform, connect Genymotion emulator to Appium server. If testing for iOS platform, Appium will launch the designated iOS simulator and connect it to the server.
-    
+
+    b. If testing for Android platform, connect Genymotion emulator to Appium server and install test app to the emulator. If testing for iOS platform, Appium will launch the designated iOS simulator, connect it to the server, and install the test app.
+
     c. Run the mocha test suite on the simulator/emulator and print out results to console.
-    
+
     d. Once testing is complete, disconnect the simulator/emulator from Appium server. Depending on the `desiredCapabilities`, iOS simulators can be left running or killed.
-    
+
     e. If Genymotion emulator is still running, gracefully kill the process.
   4. Gracefully kill the Appium local server.
