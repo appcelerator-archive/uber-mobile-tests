@@ -59,7 +59,25 @@ The Appium tests (UI verification) lives in the `appium_tests` directory.
 
 This part is a port of https://github.com/appcelerator/appium-tests. To write Appium tests, follow these steps: https://github.com/appcelerator/appium-tests#how-to-write-tests.
 
-**Note:** When the above steps reference the `tests` directory in `appium-tests`, that will be `appium_tests` directory in this framework.
+**Note:** The above link will reference this test suite structure:
+
+```
+tests/
+|--- suite_name/
+	 |--- test_app/
+	 |--- platform.js
+	 |--- platform2.js
+```
+
+For this framework, the `tests/` directory will be `appium_tests/` directory:
+
+```
+appium_tests/
+|--- suite_name/
+	 |--- test_app/
+	 |--- platform.js
+	 |--- platform2.js
+```
 
 # Technical Notes
 
