@@ -12,12 +12,23 @@ program
 	.option('-b, --branch [branchName]', 'Install a specific branch of the SDK to test with. Defaults to \'master\'.', 'master')
 	.option('-u, --sdk-url <url>', 'Install the specified SDK URL.')
 	.option('-z, --sdk-zip <pathToZip>', 'Install the specified SDK zip.')
-	.option('-p, --platforms <platform1,platform2>', 'Run unit tests on the given platforms. Defaults to \'android,ios\'.', /^(android(,ios)?)|(ios(,android)?)$/, 'android,ios')
+	.option('-p, --platforms <platform1,platform2>', 'Run unit tests on the given platforms. Defaults to \'android,ios\'.', 'android,ios')
 	.parse(process.argv);
 
 const
 	platforms = program.platforms.split(','),
 	sdkSrc = getSDKSrc(program.branch, program.sdkUrl, program.sdkZip);
+
+// simple check if platform is supported
+platforms.forEach(platform => {
+	const notSupported =
+		platform !== 'ios' &&
+		platform !== 'android';
+	if (notSupported) {
+		console.log(`'${platform}' is not a valid platform.`);
+		process.exit(1);
+	}
+});
 
 new Promise((resolve, reject) => {
 	// run unit tests first
