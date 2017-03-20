@@ -34,8 +34,7 @@ new Promise((resolve, reject) => {
 	// run unit tests first
 	unit.test(sdkSrc, platforms, (err, results) => {
 		if (err) {
-			reject(err);
-			return;
+			return reject(err);
 		}
 		resolve(results);
 	});
