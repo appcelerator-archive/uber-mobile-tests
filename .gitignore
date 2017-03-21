@@ -1,6 +1,7 @@
 .DS_Store
 junit.*.xml
+build
 /node_modules
 !lib/unit_test/app/Resources/node_modules
 lib/unit_test/mocha
-build
+lib/appium_test/temp

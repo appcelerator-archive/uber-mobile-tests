@@ -57,27 +57,44 @@ var should = require('./utilities/assertions'),
 
 The Appium tests (UI verification) lives in the `appium_tests` directory.
 
-This part is a port of https://github.com/appcelerator/appium-tests. To write Appium tests, follow these steps: https://github.com/appcelerator/appium-tests#how-to-write-tests.
+This part is a port of https://github.com/appcelerator/appium-tests. https://github.com/appcelerator/appium-tests#2-test_configjs and https://github.com/appcelerator/appium-tests#3-mocha-files still applies to this framework. However, take note when creating the test app in `appium_tests`. You can create either a Titanium classic app or Alloy app:
 
-**Note:** The above link will reference this test suite structure:
+**Titanium classic app:**
 
-```
-tests/
-|--- suite_name/
-	 |--- test_app/
-	 |--- platform.js
-	 |--- platform2.js
-```
-
-For this framework, the `tests/` directory will be `appium_tests/` directory:
+* At a minimum, the Titanium classic app needs `Resources/app.js` and `tiapp.xml`.
 
 ```
 appium_tests/
 |--- suite_name/
-	 |--- test_app/
+	 |--- ti_classic_app/
+	      |--- Resources/
+	           |--- app.js
+	      |--- tiapp.xml
 	 |--- platform.js
 	 |--- platform2.js
 ```
+
+**Alloy app:**
+
+* At a minimum, the Alloy app needs `app/controllers/index.js` and `tiapp.xml`.
+
+```
+appium_tests/
+|--- suite_name/
+	 |--- alloy_app/
+	      |--- app/
+	           |--- controllers
+	                |--- index.js
+	      |--- tiapp.xml
+	 |--- platform.js
+	 |--- platform2.js
+```
+
+* You do not need to worry about the default assets for the Titanium classic and Alloy app. They are stored separately in `./lib/appium_test/classic_app` and `./lib/appium_test/alloy_app` respectively.
+* The test apps' behavior mimic a regular Titanium classic or Alloy app. For example, if the classic test app needs more images for testing, it's okay to create a `Resources/assets/images/` folder in the test app and add the images into that folder.
+* If you want to replace the default assets with your own content, use the same default directory structure and file name in the test app.
+* The `tiapp.xml` should be treated like how you would normally treat a `tiapp.xml` in a Titanium classic or Alloy app.
+* No cloud services should be enabled for the test apps.
 
 # Technical Notes
 
@@ -88,15 +105,15 @@ appium_tests/
   1. In parallel:
 
       a. Install and set as default the new Titanium SDK, if available.
-	
+
       b. Delete `mocha` test app, if available.
-    
+
   2. Record the path to the installed Titanium SDK. Will be used for SDK cleanup.
   3. Create a Titanium classic project (called `mocha`) with `appc new`.
   4. Copy files from `lib/unit_test/app` into `mocha/Resources` directory.
 
       a. During this phase, the unit tests in `unit_tests` directory will be copied into `mocha/Resources`
-    
+
   5. Add specific properties into `mocha/tiapp.xml`.
   6. Run (using `appc run`) `mocha` app, i.e. unit tests, against specified platforms.
   7. Write results to JUnit XML files at the root level of this framework.
@@ -104,17 +121,22 @@ appium_tests/
 
 * Appium flow `require('./lib/appium_test/helper.js').test()`:
 
-  1. Launch Appium server locally.
-  2. Clean and build (with `appc` CLI) all the test apps in `appium_tests` directory with selected Titanium SDK.
-  3. While looping through each test suite in `appium_tests` directory, do the following:
+  1. Launch Appium server on local machine.
+  2. Create a data structure that contains information about the target mocha file, target test app, and desired Appium capabilities.
+  3. While looping through the previous data structure and do the following:
 
-      a. Launch designated Genymotion emulator if testing against Android platform. If testing against iOS platform, designated simulator will be launched in next step by Appium.
+      a. Using the above data structure, create a temporary mobile app (`lib/appium_test/temp`) that combines both the base app (`alloy_app` or `classic_app`) and target test app.
 
-      b. If testing for Android platform, connect Genymotion emulator to Appium server and install test app to the emulator. If testing for iOS platform, Appium will launch the designated iOS simulator, connect it to the server, and install the test app.
+      b. Build (with `appc` CLI) `temp` app with selected Titanium SDK.
 
-      c. Run the mocha test suite on the simulator/emulator and print out results to console.
+      c. Launch designated Genymotion emulator if testing against Android platform. If testing against iOS platform, designated simulator will be launched in next step by Appium.
 
-      d. Once testing is complete, disconnect the simulator/emulator from Appium server. Depending on the `desiredCapabilities`, iOS simulators can be left running or killed.
+      d. If testing for Android platform, connect Genymotion emulator to Appium server and install test app to the emulator. If testing for iOS platform, Appium will launch the designated iOS simulator, connect it to the server, and install the test app.
 
-      e. If Genymotion emulator is still running, gracefully kill the process.
-  4. Gracefully kill the Appium local server.
+      e. Run the mocha test suite on the simulator/emulator and print out results to console.
+
+      f. Once testing is complete, disconnect the simulator/emulator from Appium server. Depending on the `desiredCapabilities`, iOS simulators can be left running or killed.
+
+      g. If Genymotion emulator is still running, gracefully kill the process.
+
+	  h. Delete `lib/appium_test/temp`.
