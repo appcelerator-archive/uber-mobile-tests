@@ -50,7 +50,7 @@ modules at the top:
 
 ```
 var should = require('./utilities/assertions'),
-	utilities = require('./utilities/utilities');
+    utilities = require('./utilities/utilities');
 ```
 
 ### Appium Tests
@@ -66,12 +66,12 @@ This part is a port of https://github.com/appcelerator/appium-tests. https://git
 ```
 appium_tests/
 |--- suite_name/
-	 |--- ti_classic_app/
-	      |--- Resources/
-	           |--- app.js
-	      |--- tiapp.xml
-	 |--- platform.js
-	 |--- platform2.js
+     |--- ti_classic_app/
+          |--- Resources/
+               |--- app.js
+          |--- tiapp.xml
+     |--- platform.js
+     |--- platform2.js
 ```
 
 **Alloy app:**
@@ -81,13 +81,13 @@ appium_tests/
 ```
 appium_tests/
 |--- suite_name/
-	 |--- alloy_app/
-	      |--- app/
-	           |--- controllers
-	                |--- index.js
-	      |--- tiapp.xml
-	 |--- platform.js
-	 |--- platform2.js
+     |--- alloy_app/
+          |--- app/
+               |--- controllers
+                    |--- index.js
+          |--- tiapp.xml
+     |--- platform.js
+     |--- platform2.js
 ```
 
 * You do not need to worry about the default assets for the Titanium classic and Alloy app. They are stored separately in `./lib/appium_test/classic_app` and `./lib/appium_test/alloy_app` respectively.
@@ -139,4 +139,4 @@ appium_tests/
 
       g. If Genymotion emulator is still running, gracefully kill the process.
 
-	  h. Delete `lib/appium_test/temp`.
+      h. Delete `lib/appium_test/temp`.
