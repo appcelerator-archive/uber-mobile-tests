@@ -1,0 +1,28 @@
+{
+	"extends": "eslint:recommended",
+	"env": {
+		"es6": true,
+		"node": true,
+		"mocha": true
+	},
+	"globals": {
+		"Ti": true,
+		"Titanium": true
+	},
+	"rules": {
+		"no-console": ["off"],
+		"no-case-declarations": ["off"],
+		"indent": [
+			"error",
+			"tab"
+		],
+		"linebreak-style": [
+			"warn",
+			"unix"
+		],
+		"semi": [
+			"error",
+			"always"
+		]
+	}
+}

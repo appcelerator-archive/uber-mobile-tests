@@ -5,3 +5,4 @@ build
 !lib/unit_test/app/Resources/node_modules
 lib/unit_test/mocha
 lib/appium_test/temp
+npm-debug.log

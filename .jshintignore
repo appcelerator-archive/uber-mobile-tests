@@ -1,0 +1,8 @@
+junit.*.xml
+build
+node_modules
+lib/appium_test/alloy_app
+lib/appium_test/classic_app
+lib/unit_test/app
+lib/unit_test/mocha
+lib/unit_test/templates

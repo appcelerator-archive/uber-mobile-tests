@@ -2,8 +2,7 @@
 
 const
 	driver = global.driver,
-	webdriver = global.webdriver,
-	curDevice = global.curDevice;
+	webdriver = global.webdriver;
 
 describe('ListView', function () {
 	// in general, the tests take a while to go through, which will hit mocha's 2 second timeout threshold.

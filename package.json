@@ -36,6 +36,13 @@
     "stream-splitter": "^0.3.2",
     "wd": "^1.1.3"
   },
+  "devDependencies": {
+    "eslint": "^3.19.0",
+    "jshint": "^2.9.4"
+  },
+  "scripts": {
+    "check": "jshint . && eslint ."
+  },
   "engines": {
     "node": ">=4.0.0"
   }
