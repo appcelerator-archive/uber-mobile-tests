@@ -11,8 +11,8 @@ describe('ListView', function () {
 
 	it('should scroll to the bottom of the list', function () {
 		const scrollUp = new webdriver.TouchAction()
-			.press({x:386, y:1034}) // press near the bottom of the list
-			.moveTo({x:0, y:-530}) // drag finger up
+			.press({x: 386, y: 1034}) // press near the bottom of the list
+			.moveTo({x: 0, y: -530}) // drag finger up
 			.release(); // release finger
 
 		return driver

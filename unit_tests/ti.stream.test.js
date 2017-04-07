@@ -5,7 +5,6 @@
  * Please see the LICENSE included with this distribution for details.
  */
 
-// jshint ignore:start
 /* eslint-disable */
 var should = require('./utilities/assertions'),
 	utilities = require('./utilities/utilities');

@@ -37,11 +37,10 @@
     "wd": "^1.2.0"
   },
   "devDependencies": {
-    "eslint": "^3.19.0",
-    "jshint": "^2.9.4"
+    "eslint": "^3.19.0"
   },
   "scripts": {
-    "check": "jshint . && eslint ."
+    "check": "eslint ."
   },
   "engines": {
     "node": ">=4.0.0"
