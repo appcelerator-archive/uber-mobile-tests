@@ -140,3 +140,13 @@ appium_tests/
       g. If Genymotion emulator is still running, gracefully kill the process.
 
       h. Delete `lib/appium_test/temp`.
+
+# Maintenance
+
+If you plan to add new tests, update existing tests, or make changes to the library, run `npm run check`. This will run `eslint` which will enforce the coding style (see `.eslintrc.json` file) for this project.
+
+Here are some useful links from ESLint:
+
+* http://eslint.org/docs/user-guide/integrations
+* http://eslint.org/docs/user-guide/configuring
+* http://eslint.org/docs/rules/
