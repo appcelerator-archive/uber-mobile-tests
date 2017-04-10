@@ -143,10 +143,13 @@ appium_tests/
 
 # Maintenance
 
-If you plan to add new tests, update existing tests, or make changes to the library, run `npm run check`. This will run `eslint` which will enforce the coding style (see `.eslintrc.json` file) for this project.
+If you plan to add new tests, update existing tests, or make changes to the framework, run `npm run check`. This will run `eslint` which will enforce the coding style (see `.eslintrc.js` file) for this project.
 
 Here are some useful links from ESLint:
 
 * http://eslint.org/docs/user-guide/integrations
+  * If you don't want to constantly use the above script to enforce the coding style, you can use the provided integrations. I personally use `linter-eslint` and `linter` packages for Atom.
 * http://eslint.org/docs/user-guide/configuring
+  * Guide to configuring ESLint.
 * http://eslint.org/docs/rules/
+  * Document to ESLint rules.
