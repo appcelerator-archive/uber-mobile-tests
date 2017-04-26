@@ -11,7 +11,7 @@ module.exports = {
 	// NOTE: as this grows, probably should put this in a proper database
 	tests: {
 		ios: {
-			// valid appium properties from https://github.com/appium/appium/blob/master/docs/en/writing-running-appium/default-capabilities-arg.md
+			// valid appium properties from https://github.com/appium/appium/blob/master/docs/en/writing-running-appium/caps.md
 			desiredCapabilities: {
 				automationName: 'XCUITest',
 				noReset: true
@@ -31,8 +31,7 @@ module.exports = {
 		android: {
 			desiredCapabilities: {
 				automationName: 'Appium',
-				noReset: true,
-				deviceReadyTimeout: 20 // seconds
+				noReset: true
 			},
 			'ti.ui.listview': {
 				proj: 'ListView',
@@ -40,8 +39,8 @@ module.exports = {
 				appActivity: '.ListviewActivity',
 				testDevices: [
 					{
-						deviceName: 'Custom Phone - 6.0.0 - API 23 - 768x1280',
-						platformVersion: '6.0'
+						deviceName: 'Custom Phone - 7.0.0 - API 24 - 768x1280',
+						platformVersion: '7.0'
 					}
 				]
 			}

@@ -12,7 +12,7 @@
   <fullscreen>false</fullscreen>
   <navbar-hidden>false</navbar-hidden>
   <analytics>true</analytics>
-  <guid>e369ea17-7875-4d9b-9bbb-1d8ba7bce695</guid>
+  <guid>7d025e82-9e92-4290-9eee-623796040622</guid>
   <property name="ti.ui.defaultunit" type="string">dp</property>
   <property name="run-on-main-thread" type="bool">true</property>
   <ios>
@@ -51,5 +51,5 @@
     <target device="iphone">true</target>
     <target device="mobileweb">false</target>
   </deployment-targets>
-  <sdk-version>6.1.0.v20170309114832</sdk-version>
+  <sdk-version>6.0.3.GA</sdk-version>
 </ti:app>
