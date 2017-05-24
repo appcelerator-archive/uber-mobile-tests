@@ -24,7 +24,7 @@
   "homepage": "https://github.com/appcelerator/uber-mobile-tests#readme",
   "dependencies": {
     "appcelerator": "^4.2.8",
-    "appium": "^1.6.3",
+    "appium": "1.6.4",
     "async": "^2.1.5",
     "chai": "^3.5.0",
     "chai-as-promised": "^6.0.0",
