@@ -2,6 +2,11 @@
 
 A singular test framework that merged both https://github.com/appcelerator/titanium-mobile-mocha-suite and https://github.com/appcelerator/appium-tests.
 
+# Caveats
+
+* Windows 10 Mobile is not supported yet: https://github.com/Microsoft/WinAppDriver/issues/38.
+  * Document for Windows mobile platform (needs to be vetted once available): https://github.com/appium/appium/blob/master/docs/en/writing-running-appium/windows-app-testing.md
+
 # Requirements
 
 1. Minimum node version 4.X.
