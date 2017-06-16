@@ -2,6 +2,9 @@
 
 A singular test framework that merged both https://github.com/appcelerator/titanium-mobile-mocha-suite and https://github.com/appcelerator/appium-tests.
 
+If this is your first time using Appium with Titanium stack, it is recommended to follow this repo first: https://github.com/appcelerator/qe-appium. This
+repo will guide you in installing Appium on your machine and it has examples of using Appium with Titanium.
+
 # Caveats
 
 * Windows 10 Mobile is not supported yet: https://github.com/Microsoft/WinAppDriver/issues/38.
